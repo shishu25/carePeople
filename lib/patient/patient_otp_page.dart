@@ -90,16 +90,17 @@ class _PatientOtpPageState extends State<PatientOtpPage> {
         // Check if user exists
         await Future.delayed(const Duration(seconds: 1));
         if (mounted) {
-          final userExists = await UserStorageService.userExists(widget.phoneNumber);
-          
+          final userExists = await UserStorageService.userExists(
+            widget.phoneNumber,
+          );
+
           if (userExists) {
             // User exists, navigate to dashboard
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => PatientDashboard(
-                  phoneNumber: widget.phoneNumber,
-                ),
+                builder: (context) =>
+                    PatientDashboard(phoneNumber: widget.phoneNumber),
               ),
             );
           } else {
@@ -107,9 +108,8 @@ class _PatientOtpPageState extends State<PatientOtpPage> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => PatientSignupPage(
-                  phoneNumber: widget.phoneNumber,
-                ),
+                builder: (context) =>
+                    PatientSignupPage(phoneNumber: widget.phoneNumber),
               ),
             );
           }

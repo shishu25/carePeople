@@ -210,7 +210,8 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
                                   width: 2,
                                 ),
                               ),
-                              counterText: '${_mobileController.text.length}/11',
+                              counterText:
+                                  '${_mobileController.text.length}/11',
                             ),
                           ),
                         ),

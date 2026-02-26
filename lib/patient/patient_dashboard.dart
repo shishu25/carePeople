@@ -6,10 +6,7 @@ import 'patient_login.dart';
 class PatientDashboard extends StatefulWidget {
   final String phoneNumber;
 
-  const PatientDashboard({
-    super.key,
-    required this.phoneNumber,
-  });
+  const PatientDashboard({super.key, required this.phoneNumber});
 
   @override
   State<PatientDashboard> createState() => _PatientDashboardState();
@@ -68,9 +65,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
     // Navigate back to login page and clear navigation stack
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
-        builder: (context) => const PatientLoginPage(),
-      ),
+      MaterialPageRoute(builder: (context) => const PatientLoginPage()),
       (route) => false, // Remove all previous routes
     );
 
@@ -96,11 +91,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
             showBackButton: false,
             actions: [
               IconButton(
-                icon: const Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                  size: 24,
-                ),
+                icon: const Icon(Icons.logout, color: Colors.white, size: 24),
                 onPressed: _showLogoutDialog,
                 tooltip: 'Logout',
               ),
@@ -134,8 +125,9 @@ class _PatientDashboardState extends State<PatientDashboard> {
                           Center(
                             child: ConstrainedBox(
                               constraints: BoxConstraints(
-                                maxWidth:
-                                    screenWidth > 600 ? 600 : double.infinity,
+                                maxWidth: screenWidth > 600
+                                    ? 600
+                                    : double.infinity,
                               ),
                               child: Card(
                                 elevation: 4,
@@ -225,8 +217,9 @@ class _PatientDashboardState extends State<PatientDashboard> {
                           Center(
                             child: ConstrainedBox(
                               constraints: BoxConstraints(
-                                maxWidth:
-                                    screenWidth > 600 ? 600 : double.infinity,
+                                maxWidth: screenWidth > 600
+                                    ? 600
+                                    : double.infinity,
                               ),
                               child: Column(
                                 children: [
@@ -273,11 +266,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(
-          icon,
-          color: Colors.green,
-          size: 20,
-        ),
+        Icon(icon, color: Colors.green, size: 20),
         const SizedBox(width: 12),
         Expanded(
           child: Column(
@@ -315,9 +304,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
   ) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: () {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -338,11 +325,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
-                  icon,
-                  color: color,
-                  size: 28,
-                ),
+                child: Icon(icon, color: color, size: 28),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -359,19 +342,12 @@ class _PatientDashboardState extends State<PatientDashboard> {
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                     ),
                   ],
                 ),
               ),
-              Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.grey[400],
-                size: 16,
-              ),
+              Icon(Icons.arrow_forward_ios, color: Colors.grey[400], size: 16),
             ],
           ),
         ),

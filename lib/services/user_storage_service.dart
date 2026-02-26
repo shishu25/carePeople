@@ -68,7 +68,7 @@ class UserStorageService {
   }) async {
     try {
       final users = await _readUsers();
-      
+
       users[phoneNumber] = {
         'name': name,
         'phoneNumber': phoneNumber,
@@ -96,7 +96,7 @@ class UserStorageService {
   }) async {
     try {
       final users = await _readUsers();
-      
+
       if (!users.containsKey(phoneNumber)) {
         return false;
       }

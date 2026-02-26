@@ -8,10 +8,7 @@ import 'patient_dashboard.dart';
 class PatientSignupPage extends StatefulWidget {
   final String phoneNumber;
 
-  const PatientSignupPage({
-    super.key,
-    required this.phoneNumber,
-  });
+  const PatientSignupPage({super.key, required this.phoneNumber});
 
   @override
   State<PatientSignupPage> createState() => _PatientSignupPageState();
@@ -22,7 +19,7 @@ class _PatientSignupPageState extends State<PatientSignupPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  
+
   String _selectedGender = 'Male';
   bool _isSaving = false;
   DateTime? _selectedDate;
@@ -97,9 +94,8 @@ class _PatientSignupPageState extends State<PatientSignupPage> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PatientDashboard(
-                    phoneNumber: widget.phoneNumber,
-                  ),
+                  builder: (context) =>
+                      PatientDashboard(phoneNumber: widget.phoneNumber),
                 ),
               );
             }
@@ -164,10 +160,7 @@ class _PatientSignupPageState extends State<PatientSignupPage> {
                       Text(
                         'Please fill in your details to continue',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
-                        ),
+                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                       ),
 
                       const SizedBox(height: 30),
@@ -329,10 +322,7 @@ class _PatientSignupPageState extends State<PatientSignupPage> {
                               children: [
                                 Row(
                                   children: [
-                                    Icon(
-                                      Icons.people,
-                                      color: Colors.grey[600],
-                                    ),
+                                    Icon(Icons.people, color: Colors.grey[600]),
                                     const SizedBox(width: 8),
                                     Text(
                                       'Gender *',
