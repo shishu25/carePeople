@@ -60,7 +60,13 @@ class IdentificationPage extends StatelessWidget {
                           ),
                           child: ElevatedButton(
                             onPressed: () {
-                              // TODO: Navigate to Doctor page
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Feature coming soon!'),
+                                  backgroundColor: Colors.blue,
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,

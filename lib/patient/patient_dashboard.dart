@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'dart:math';
 import '../mixed/appbar.dart';
 import '../services/user_storage_service.dart';
-import 'patient_login.dart';
+import 'patient_profile_edit.dart';
+import '../appointments/book_appointment_page.dart';
+import '../settings/settings_page.dart';
+import '../activities/activities_page.dart';
 
 class PatientDashboard extends StatefulWidget {
   final String phoneNumber;
@@ -30,328 +35,611 @@ class _PatientDashboardState extends State<PatientDashboard> {
     });
   }
 
-  void _showLogoutDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Logout'),
-          content: const Text('Are you sure you want to logout?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close dialog
-              },
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close dialog
-                _logout();
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Responsive values based on screen size
+    final horizontalPadding = screenWidth * 0.04; // 4% of screen width
+    final cardBorderRadius = screenWidth * 0.04; // 4% of screen width
+    final welcomeFontSize = screenWidth * 0.06; // 6% of screen width
+    final iconSize = screenWidth * 0.07; // 7% of screen width
+    final featureCardHeight = screenHeight * 0.18; // 18% of screen height
+    final buttonPadding = screenWidth * 0.06; // 6% of screen width
+
+    return Scaffold(
+      backgroundColor: Colors.grey[100],
+      body: Stack(
+        children: [
+          // Background Image with Opacity
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.12,
+              child: Image.asset(
+                'assets/images/CarePeople.png',
+                fit: BoxFit.cover,
               ),
-              child: const Text('Logout'),
             ),
-          ],
-        );
-      },
-    );
-  }
+          ),
+          // Foreground Content
+          Column(
+            children: [
+              CustomAppBar(
+                title: 'Patient Portal',
+                showBackButton: false,
+                actions: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.notifications_outlined,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('No new notifications'),
+                          backgroundColor: Colors.blue,
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    },
+                    tooltip: 'Notifications',
+                  ),
+                ],
+              ),
+              Expanded(
+                child: _isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: horizontalPadding,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              SizedBox(height: screenHeight * 0.03),
 
-  void _logout() {
-    // Navigate back to login page and clear navigation stack
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const PatientLoginPage()),
-      (route) => false, // Remove all previous routes
-    );
+                              // Welcome Card
+                              Container(
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    colors: [Colors.green, Colors.blue],
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                    cardBorderRadius,
+                                  ),
+                                  border: Border.all(
+                                    color: Colors.grey[300]!,
+                                    width: 1,
+                                  ),
+                                ),
+                                padding: EdgeInsets.all(screenWidth * 0.05),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Welcome ${_userData?['name']?.split(' ')[0] ?? 'Mr./Mrs.'}',
+                                      style: TextStyle(
+                                        fontSize: welcomeFontSize,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(height: screenHeight * 0.03),
+                                    // Top Row Icons
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        _buildQuickAccessIcon(
+                                          Icons.person_outline,
+                                          'Your Profile',
+                                          Colors.blue[200]!,
+                                          Colors.blue,
+                                          iconSize,
+                                          screenWidth,
+                                        ),
+                                        _buildQuickAccessIcon(
+                                          Icons.settings_outlined,
+                                          'Settings',
+                                          Colors.blue[200]!,
+                                          Colors.blue,
+                                          iconSize,
+                                          screenWidth,
+                                        ),
+                                        _buildQuickAccessIcon(
+                                          Icons.trending_up,
+                                          'Activities',
+                                          Colors.blue[200]!,
+                                          Colors.blue,
+                                          iconSize,
+                                          screenWidth,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
 
-    // Show logout success message
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Logged out successfully!'),
-        backgroundColor: Colors.green,
-        duration: Duration(seconds: 2),
+                              SizedBox(height: screenHeight * 0.025),
+
+                              // Grid of Feature Cards
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildFeatureCard(
+                                      Icons.calendar_today,
+                                      'Book\nAppointment',
+                                      Colors.green[300]!,
+                                      Colors.green,
+                                      featureCardHeight,
+                                      screenWidth,
+                                      cardBorderRadius,
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                BookAppointmentPage(
+                                                  phoneNumber:
+                                                      widget.phoneNumber,
+                                                ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(width: horizontalPadding),
+                                  Expanded(
+                                    child: _buildFeatureCard(
+                                      Icons.local_hospital_outlined,
+                                      'Department Info',
+                                      Colors.lightBlueAccent[100]!,
+                                      Colors.blue,
+                                      featureCardHeight,
+                                      screenWidth,
+                                      cardBorderRadius,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              SizedBox(height: horizontalPadding),
+
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildFeatureCard(
+                                      Icons.medical_services_outlined,
+                                      'Doctor Info',
+                                      Colors.deepOrange[800]!,
+                                      Colors.yellow[400],
+                                      featureCardHeight,
+                                      screenWidth,
+                                      cardBorderRadius,
+                                    ),
+                                  ),
+                                  SizedBox(width: horizontalPadding),
+                                  Expanded(
+                                    child: _buildFeatureCard(
+                                      Icons.local_pharmacy_outlined,
+                                      'Tests',
+                                      Colors.black,
+                                      Colors.blueAccent,
+                                      featureCardHeight,
+                                      screenWidth,
+                                      cardBorderRadius,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              SizedBox(height: horizontalPadding),
+
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildFeatureCard(
+                                      Icons.emergency,
+                                      'Emergency\nService',
+                                      Colors.red[50]!,
+                                      Colors.red,
+                                      featureCardHeight,
+                                      screenWidth,
+                                      cardBorderRadius,
+                                    ),
+                                  ),
+                                  SizedBox(width: horizontalPadding),
+                                  Expanded(
+                                    child: _buildFeatureCard(
+                                      Icons.auto_awesome,
+                                      'AI Suggestion',
+                                      Colors.purple[100]!,
+                                      Colors.purple,
+                                      featureCardHeight,
+                                      screenWidth,
+                                      cardBorderRadius,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              SizedBox(height: screenHeight * 0.02),
+                            ],
+                          ),
+                        ),
+                      ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.fromLTRB(
+          horizontalPadding,
+          0,
+          horizontalPadding,
+          screenHeight * 0.06,
+        ),
+        child: Material(
+          color: const Color(0xFFE1BEE7), // Light purple color
+          borderRadius: BorderRadius.circular(30),
+          elevation: 2,
+          child: InkWell(
+            onTap: _showHospitalTourModal,
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: buttonPadding,
+                vertical: screenHeight * 0.02,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.home,
+                        color: Colors.black,
+                        size: screenWidth * 0.06,
+                      ),
+                      SizedBox(width: screenWidth * 0.03),
+                      Text(
+                        'Hospital Tour',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: screenWidth * 0.04,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Icon(
+                    Icons.keyboard_arrow_up,
+                    color: Colors.black,
+                    size: screenWidth * 0.07,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+  // List of random YouTube video IDs for hospital tours
+  final List<String> _hospitalTourVideos = [
+    'dQw4w9WgXcQ', // Replace with actual hospital tour video IDs
+    'kJQP7kiw5Fk', // Replace with actual hospital tour video IDs
+    '9bZkp7q19f0', // Replace with actual hospital tour video IDs
+    'hTWKbfoikeg', // Replace with actual hospital tour video IDs
+  ];
 
-    return Scaffold(
-      body: Column(
+  void _showHospitalTourModal() {
+    // Get a random video ID
+    final random = Random();
+    final videoId =
+        _hospitalTourVideos[random.nextInt(_hospitalTourVideos.length)];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      isDismissible: true,
+      enableDrag: true,
+      builder: (BuildContext context) {
+        return _HospitalTourModal(videoId: videoId);
+      },
+    );
+  }
+
+  Widget _buildQuickAccessIcon(
+    IconData icon,
+    String label,
+    Color backgroundColor,
+    Color? iconColor,
+    double iconSize,
+    double screenWidth,
+  ) {
+    return InkWell(
+      onTap: () {
+        if (label == 'Your Profile') {
+          // Navigate to profile edit page
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  PatientProfileEditPage(phoneNumber: widget.phoneNumber),
+            ),
+          ).then((_) {
+            // Reload user data when returning from profile edit
+            _loadUserData();
+          });
+        } else if (label == 'Settings') {
+          // Navigate to settings page
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  SettingsPage(phoneNumber: widget.phoneNumber),
+            ),
+          );
+        } else if (label == 'Activities') {
+          // Navigate to activities page
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  ActivitiesPage(phoneNumber: widget.phoneNumber),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('$label feature coming soon!'),
+              backgroundColor: Colors.blue,
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      },
+      borderRadius: BorderRadius.circular(screenWidth * 0.03),
+      child: Column(
         children: [
-          CustomAppBar(
-            title: 'Dashboard',
-            showBackButton: false,
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.logout, color: Colors.white, size: 24),
-                onPressed: _showLogoutDialog,
-                tooltip: 'Logout',
-              ),
-            ],
+          Container(
+            padding: EdgeInsets.all(screenWidth * 0.04),
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: iconColor, size: iconSize),
           ),
-          Expanded(
-            child: _isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: screenWidth > 600 ? 32 : 16,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const SizedBox(height: 30),
-
-                          // Welcome message
-                          Text(
-                            'Welcome, ${_userData?['name'] ?? 'Patient'}!',
-                            style: const TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-
-                          const SizedBox(height: 30),
-
-                          // Profile Card
-                          Center(
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                maxWidth: screenWidth > 600
-                                    ? 600
-                                    : double.infinity,
-                              ),
-                              child: Card(
-                                elevation: 4,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(24),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Row(
-                                        children: [
-                                          Icon(
-                                            Icons.person,
-                                            color: Colors.green,
-                                            size: 28,
-                                          ),
-                                          SizedBox(width: 12),
-                                          Text(
-                                            'Your Profile',
-                                            style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-
-                                      const SizedBox(height: 24),
-                                      const Divider(),
-                                      const SizedBox(height: 16),
-
-                                      // Name
-                                      _buildInfoRow(
-                                        Icons.person_outline,
-                                        'Name',
-                                        _userData?['name'] ?? 'N/A',
-                                      ),
-
-                                      const SizedBox(height: 16),
-
-                                      // Phone
-                                      _buildInfoRow(
-                                        Icons.phone,
-                                        'Phone Number',
-                                        _userData?['phoneNumber'] ?? 'N/A',
-                                      ),
-
-                                      const SizedBox(height: 16),
-
-                                      // Date of Birth
-                                      _buildInfoRow(
-                                        Icons.cake,
-                                        'Date of Birth',
-                                        _userData?['dateOfBirth'] ?? 'N/A',
-                                      ),
-
-                                      const SizedBox(height: 16),
-
-                                      // Gender
-                                      _buildInfoRow(
-                                        Icons.people,
-                                        'Gender',
-                                        _userData?['gender'] ?? 'N/A',
-                                      ),
-
-                                      const SizedBox(height: 16),
-
-                                      // Address
-                                      _buildInfoRow(
-                                        Icons.location_on,
-                                        'Address',
-                                        _userData?['address'] ?? 'N/A',
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          const SizedBox(height: 30),
-
-                          // Action Buttons
-                          Center(
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                maxWidth: screenWidth > 600
-                                    ? 600
-                                    : double.infinity,
-                              ),
-                              child: Column(
-                                children: [
-                                  _buildActionCard(
-                                    context,
-                                    Icons.calendar_today,
-                                    'Appointments',
-                                    'View and manage your appointments',
-                                    Colors.blue,
-                                  ),
-                                  const SizedBox(height: 16),
-                                  _buildActionCard(
-                                    context,
-                                    Icons.medical_services,
-                                    'Medical Records',
-                                    'Access your medical history',
-                                    Colors.red,
-                                  ),
-                                  const SizedBox(height: 16),
-                                  _buildActionCard(
-                                    context,
-                                    Icons.medication,
-                                    'Prescriptions',
-                                    'View your prescriptions',
-                                    Colors.orange,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          const SizedBox(height: 30),
-                        ],
-                      ),
-                    ),
-                  ),
+          SizedBox(height: screenWidth * 0.02),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: screenWidth * 0.03,
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildInfoRow(IconData icon, String label, String value) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(icon, color: Colors.green, size: 20),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.w500,
-                ),
+  Widget _buildFeatureCard(
+    IconData icon,
+    String title,
+    Color backgroundColor,
+    Color? iconColor,
+    double cardHeight,
+    double screenWidth,
+    double borderRadius, {
+    VoidCallback? onTap,
+  }) {
+    return InkWell(
+      onTap:
+          onTap ??
+          () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('$title feature coming soon!'),
+                backgroundColor: iconColor,
+                duration: const Duration(seconds: 2),
               ),
-              const SizedBox(height: 4),
-              Text(
-                value,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+            );
+          },
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: Container(
+        height: cardHeight,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              backgroundColor,
+              iconColor?.withOpacity(0.3) ?? backgroundColor,
             ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
-      ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: iconColor, size: screenWidth * 0.12),
+            SizedBox(height: screenWidth * 0.03),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: screenWidth * 0.04,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[800],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Separate StatefulWidget for Hospital Tour Modal to properly manage YouTube controller
+class _HospitalTourModal extends StatefulWidget {
+  final String videoId;
+
+  const _HospitalTourModal({required this.videoId});
+
+  @override
+  State<_HospitalTourModal> createState() => _HospitalTourModalState();
+}
+
+class _HospitalTourModalState extends State<_HospitalTourModal> {
+  late YoutubePlayerController _ytController;
+
+  @override
+  void initState() {
+    super.initState();
+    _ytController = YoutubePlayerController(
+      initialVideoId: widget.videoId,
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+        enableCaption: false,
+      ),
     );
   }
 
-  Widget _buildActionCard(
-    BuildContext context,
-    IconData icon,
-    String title,
-    String subtitle,
-    Color color,
-  ) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: InkWell(
-        onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('$title feature coming soon!'),
-              backgroundColor: color,
+  @override
+  void dispose() {
+    _ytController.pause();
+    _ytController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      initialChildSize: 0.7,
+      minChildSize: 0.5,
+      maxChildSize: 0.95,
+      builder: (_, scrollController) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
             ),
-          );
-        },
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
+          ),
+          child: Column(
             children: [
+              // Handle bar
               Container(
-                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                width: 40,
+                height: 4,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(2),
                 ),
-                child: Icon(icon, color: color, size: 28),
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              // Title
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 18,
+                    const Text(
+                      'Hospital Tour',
+                      style: TextStyle(
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios, color: Colors.grey[400], size: 16),
+              const Divider(height: 1),
+              // YouTube Player
+              Expanded(
+                child: SingleChildScrollView(
+                  controller: scrollController,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // YouTube Video Player
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: YoutubePlayer(
+                            controller: _ytController,
+                            showVideoProgressIndicator: true,
+                            progressIndicatorColor: Colors.blue,
+                            onReady: () {
+                              // Video is ready to play
+                            },
+                            onEnded: (metadata) {
+                              // Video has ended
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        // Description
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Welcome to our Hospital Tour',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Take a virtual tour of our facilities and learn more about our services, departments, and state-of-the-art medical equipment.',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black87,
+                                  height: 1.5,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

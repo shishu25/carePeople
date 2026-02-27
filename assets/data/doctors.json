@@ -1,0 +1,224 @@
+{
+  "doctors": [
+    {
+      "id": "DOC001",
+      "name": "Dr. Sarah Mitchell",
+      "department": "Cardiology",
+      "designation": "Senior Consultant",
+      "degrees": "MBBS, MD, DM (Cardiology)",
+      "roomNumber": "301",
+      "consultationFee": 1500,
+      "consultationDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday"],
+      "consultationTimes": "09:00 AM - 01:00 PM, 03:00 PM - 06:00 PM"
+    },
+    {
+      "id": "DOC002",
+      "name": "Dr. James Wilson",
+      "department": "Neurology",
+      "designation": "Chief Neurologist",
+      "degrees": "MBBS, MD, DM (Neurology)",
+      "roomNumber": "405",
+      "consultationFee": 1800,
+      "consultationDays": ["Sunday", "Monday", "Wednesday", "Thursday"],
+      "consultationTimes": "10:00 AM - 02:00 PM, 04:00 PM - 07:00 PM"
+    },
+    {
+      "id": "DOC003",
+      "name": "Dr. Emily Chen",
+      "department": "Pediatrics",
+      "designation": "Consultant Pediatrician",
+      "degrees": "MBBS, MD (Pediatrics)",
+      "roomNumber": "201",
+      "consultationFee": 1000,
+      "consultationDays": ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday"],
+      "consultationTimes": "08:00 AM - 12:00 PM, 02:00 PM - 05:00 PM"
+    },
+    {
+      "id": "DOC004",
+      "name": "Dr. Michael Brown",
+      "department": "Orthopedics",
+      "designation": "Senior Orthopedic Surgeon",
+      "degrees": "MBBS, MS (Orthopedics)",
+      "roomNumber": "502",
+      "consultationFee": 1200,
+      "consultationDays": ["Sunday", "Tuesday", "Wednesday", "Friday"],
+      "consultationTimes": "09:00 AM - 01:00 PM"
+    },
+    {
+      "id": "DOC005",
+      "name": "Dr. Lisa Anderson",
+      "department": "Dermatology",
+      "designation": "Consultant Dermatologist",
+      "degrees": "MBBS, MD (Dermatology)",
+      "roomNumber": "103",
+      "consultationFee": 900,
+      "consultationDays": ["Monday", "Tuesday", "Thursday", "Friday", "Saturday"],
+      "consultationTimes": "10:00 AM - 01:00 PM, 03:00 PM - 06:00 PM"
+    },
+    {
+      "id": "DOC006",
+      "name": "Dr. Robert Taylor",
+      "department": "General Surgery",
+      "designation": "Chief Surgeon",
+      "degrees": "MBBS, MS, FRCS",
+      "roomNumber": "601",
+      "consultationFee": 2000,
+      "consultationDays": ["Sunday", "Monday", "Tuesday", "Thursday"],
+      "consultationTimes": "09:00 AM - 12:00 PM"
+    },
+    {
+      "id": "DOC007",
+      "name": "Dr. Maria Garcia",
+      "department": "Gynecology",
+      "designation": "Senior Gynecologist",
+      "degrees": "MBBS, MD (Obs & Gyn)",
+      "roomNumber": "304",
+      "consultationFee": 1300,
+      "consultationDays": ["Saturday", "Sunday", "Tuesday", "Wednesday", "Thursday"],
+      "consultationTimes": "10:00 AM - 02:00 PM, 04:00 PM - 06:00 PM"
+    },
+    {
+      "id": "DOC008",
+      "name": "Dr. David Kim",
+      "department": "Ophthalmology",
+      "designation": "Eye Specialist",
+      "degrees": "MBBS, MS (Ophthalmology)",
+      "roomNumber": "206",
+      "consultationFee": 800,
+      "consultationDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "consultationTimes": "09:00 AM - 01:00 PM, 02:00 PM - 05:00 PM"
+    },
+    {
+      "id": "DOC009",
+      "name": "Dr. Jennifer Lee",
+      "department": "Psychiatry",
+      "designation": "Consultant Psychiatrist",
+      "degrees": "MBBS, MD (Psychiatry)",
+      "roomNumber": "701",
+      "consultationFee": 1100,
+      "consultationDays": ["Sunday", "Monday", "Wednesday", "Friday"],
+      "consultationTimes": "11:00 AM - 03:00 PM, 05:00 PM - 08:00 PM"
+    },
+    {
+      "id": "DOC010",
+      "name": "Dr. Christopher Davis",
+      "department": "Cardiology",
+      "designation": "Cardiac Surgeon",
+      "degrees": "MBBS, MS, MCh (Cardiac Surgery)",
+      "roomNumber": "302",
+      "consultationFee": 2500,
+      "consultationDays": ["Sunday", "Tuesday", "Thursday"],
+      "consultationTimes": "08:00 AM - 12:00 PM"
+    },
+    {
+      "id": "DOC011",
+      "name": "Dr. Amanda Rodriguez",
+      "department": "Endocrinology",
+      "designation": "Senior Endocrinologist",
+      "degrees": "MBBS, MD, DM (Endocrinology)",
+      "roomNumber": "408",
+      "consultationFee": 1400,
+      "consultationDays": ["Monday", "Wednesday", "Thursday", "Saturday"],
+      "consultationTimes": "09:00 AM - 01:00 PM, 03:00 PM - 06:00 PM"
+    },
+    {
+      "id": "DOC012",
+      "name": "Dr. Kevin Martinez",
+      "department": "Urology",
+      "designation": "Consultant Urologist",
+      "degrees": "MBBS, MS (Urology)",
+      "roomNumber": "505",
+      "consultationFee": 1200,
+      "consultationDays": ["Sunday", "Monday", "Tuesday", "Friday", "Saturday"],
+      "consultationTimes": "10:00 AM - 01:00 PM, 04:00 PM - 07:00 PM"
+    },
+    {
+      "id": "DOC013",
+      "name": "Dr. Rachel Thompson",
+      "department": "Pediatrics",
+      "designation": "Pediatric Surgeon",
+      "degrees": "MBBS, MS, MCh (Pediatric Surgery)",
+      "roomNumber": "202",
+      "consultationFee": 1600,
+      "consultationDays": ["Sunday", "Tuesday", "Wednesday", "Thursday"],
+      "consultationTimes": "08:00 AM - 12:00 PM, 02:00 PM - 04:00 PM"
+    },
+    {
+      "id": "DOC014",
+      "name": "Dr. Daniel White",
+      "department": "Neurology",
+      "designation": "Neurosurgeon",
+      "degrees": "MBBS, MS, MCh (Neurosurgery)",
+      "roomNumber": "406",
+      "consultationFee": 2200,
+      "consultationDays": ["Monday", "Wednesday", "Thursday", "Friday"],
+      "consultationTimes": "10:00 AM - 01:00 PM"
+    },
+    {
+      "id": "DOC015",
+      "name": "Dr. Sophia Patel",
+      "department": "ENT",
+      "designation": "ENT Specialist",
+      "degrees": "MBBS, MS (ENT)",
+      "roomNumber": "305",
+      "consultationFee": 950,
+      "consultationDays": ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Friday"],
+      "consultationTimes": "09:00 AM - 01:00 PM, 03:00 PM - 06:00 PM"
+    },
+    {
+      "id": "DOC016",
+      "name": "Dr. William Clark",
+      "department": "Gastroenterology",
+      "designation": "Senior Gastroenterologist",
+      "degrees": "MBBS, MD, DM (Gastroenterology)",
+      "roomNumber": "409",
+      "consultationFee": 1500,
+      "consultationDays": ["Sunday", "Tuesday", "Wednesday", "Thursday"],
+      "consultationTimes": "09:00 AM - 12:00 PM, 04:00 PM - 07:00 PM"
+    },
+    {
+      "id": "DOC017",
+      "name": "Dr. Olivia Harris",
+      "department": "Rheumatology",
+      "designation": "Consultant Rheumatologist",
+      "degrees": "MBBS, MD (Rheumatology)",
+      "roomNumber": "308",
+      "consultationFee": 1300,
+      "consultationDays": ["Monday", "Tuesday", "Thursday", "Saturday"],
+      "consultationTimes": "10:00 AM - 02:00 PM, 03:00 PM - 05:00 PM"
+    },
+    {
+      "id": "DOC018",
+      "name": "Dr. Thomas Moore",
+      "department": "Pulmonology",
+      "designation": "Chest Specialist",
+      "degrees": "MBBS, MD (Pulmonology)",
+      "roomNumber": "410",
+      "consultationFee": 1200,
+      "consultationDays": ["Sunday", "Monday", "Wednesday", "Friday", "Saturday"],
+      "consultationTimes": "09:00 AM - 01:00 PM, 02:00 PM - 05:00 PM"
+    },
+    {
+      "id": "DOC019",
+      "name": "Dr. Isabella Jackson",
+      "department": "Nephrology",
+      "designation": "Kidney Specialist",
+      "degrees": "MBBS, MD, DM (Nephrology)",
+      "roomNumber": "411",
+      "consultationFee": 1400,
+      "consultationDays": ["Sunday", "Tuesday", "Wednesday", "Thursday", "Saturday"],
+      "consultationTimes": "10:00 AM - 02:00 PM, 04:00 PM - 06:00 PM"
+    },
+    {
+      "id": "DOC020",
+      "name": "Dr. Andrew Lewis",
+      "department": "Oncology",
+      "designation": "Cancer Specialist",
+      "degrees": "MBBS, MD, DM (Medical Oncology)",
+      "roomNumber": "702",
+      "consultationFee": 2000,
+      "consultationDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "consultationTimes": "09:00 AM - 12:00 PM, 03:00 PM - 06:00 PM"
+    }
+  ]
+}
