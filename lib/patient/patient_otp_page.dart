@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'dart:math';
 import '../mixed/appbar.dart';
 import '../services/user_storage_service.dart';
+import '../services/session_service.dart';
 import 'patient_signup.dart';
 import 'patient_dashboard.dart';
 
@@ -93,6 +94,9 @@ class _PatientOtpPageState extends State<PatientOtpPage> {
           final userExists = await UserStorageService.userExists(
             widget.phoneNumber,
           );
+
+          // Save session for 2 days
+          await SessionService.saveSession(widget.phoneNumber);
 
           if (userExists) {
             // User exists, navigate to dashboard

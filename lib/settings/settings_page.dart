@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../patient/patient_login.dart';
+import '../home/spashpage/identification.dart';
 import '../mixed/appbar.dart';
+import '../services/session_service.dart';
 
 class SettingsPage extends StatefulWidget {
   final String phoneNumber;
@@ -245,16 +246,21 @@ class _SettingsPageState extends State<SettingsPage> {
               child: Text('Cancel', style: TextStyle(color: Colors.grey[600])),
             ),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context); // Close dialog
-                // Navigate to login and remove all previous routes
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PatientLoginPage(),
-                  ),
-                  (route) => false,
-                );
+              onPressed: () async {
+                // Clear session
+                await SessionService.clearSession();
+
+                if (context.mounted) {
+                  Navigator.pop(context); // Close dialog
+                  // Navigate to identification page and remove all previous routes
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const IdentificationPage(),
+                    ),
+                    (route) => false,
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,

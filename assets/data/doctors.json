@@ -2,7 +2,7 @@
   "doctors": [
     {
       "id": "DOC001",
-      "name": "Dr. Sarah Mitchell",
+      "name": "Dr. Md. Kamal Hossain",
       "department": "Cardiology",
       "designation": "Senior Consultant",
       "degrees": "MBBS, MD, DM (Cardiology)",
@@ -13,7 +13,7 @@
     },
     {
       "id": "DOC002",
-      "name": "Dr. James Wilson",
+      "name": "Dr. Farhana Rahman",
       "department": "Neurology",
       "designation": "Chief Neurologist",
       "degrees": "MBBS, MD, DM (Neurology)",
@@ -24,7 +24,7 @@
     },
     {
       "id": "DOC003",
-      "name": "Dr. Emily Chen",
+      "name": "Dr. Sharmin Akter",
       "department": "Pediatrics",
       "designation": "Consultant Pediatrician",
       "degrees": "MBBS, MD (Pediatrics)",
@@ -35,7 +35,7 @@
     },
     {
       "id": "DOC004",
-      "name": "Dr. Michael Brown",
+      "name": "Dr. Rafiqul Islam",
       "department": "Orthopedics",
       "designation": "Senior Orthopedic Surgeon",
       "degrees": "MBBS, MS (Orthopedics)",
@@ -46,7 +46,7 @@
     },
     {
       "id": "DOC005",
-      "name": "Dr. Lisa Anderson",
+      "name": "Dr. Nasrin Sultana",
       "department": "Dermatology",
       "designation": "Consultant Dermatologist",
       "degrees": "MBBS, MD (Dermatology)",
@@ -57,7 +57,7 @@
     },
     {
       "id": "DOC006",
-      "name": "Dr. Robert Taylor",
+      "name": "Dr. Abdul Latif Chowdhury",
       "department": "General Surgery",
       "designation": "Chief Surgeon",
       "degrees": "MBBS, MS, FRCS",
@@ -68,7 +68,7 @@
     },
     {
       "id": "DOC007",
-      "name": "Dr. Maria Garcia",
+      "name": "Dr. Tahmina Begum",
       "department": "Gynecology",
       "designation": "Senior Gynecologist",
       "degrees": "MBBS, MD (Obs & Gyn)",
@@ -79,7 +79,7 @@
     },
     {
       "id": "DOC008",
-      "name": "Dr. David Kim",
+      "name": "Dr. Anwar Hossain",
       "department": "Ophthalmology",
       "designation": "Eye Specialist",
       "degrees": "MBBS, MS (Ophthalmology)",
@@ -90,7 +90,7 @@
     },
     {
       "id": "DOC009",
-      "name": "Dr. Jennifer Lee",
+      "name": "Dr. Ayesha Siddiqua",
       "department": "Psychiatry",
       "designation": "Consultant Psychiatrist",
       "degrees": "MBBS, MD (Psychiatry)",
@@ -101,7 +101,7 @@
     },
     {
       "id": "DOC010",
-      "name": "Dr. Christopher Davis",
+      "name": "Dr. Mohammad Ali Khan",
       "department": "Cardiology",
       "designation": "Cardiac Surgeon",
       "degrees": "MBBS, MS, MCh (Cardiac Surgery)",
@@ -112,7 +112,7 @@
     },
     {
       "id": "DOC011",
-      "name": "Dr. Amanda Rodriguez",
+      "name": "Dr. Razia Khatun",
       "department": "Endocrinology",
       "designation": "Senior Endocrinologist",
       "degrees": "MBBS, MD, DM (Endocrinology)",
@@ -123,7 +123,7 @@
     },
     {
       "id": "DOC012",
-      "name": "Dr. Kevin Martinez",
+      "name": "Dr. Shahidul Alam",
       "department": "Urology",
       "designation": "Consultant Urologist",
       "degrees": "MBBS, MS (Urology)",
@@ -134,7 +134,7 @@
     },
     {
       "id": "DOC013",
-      "name": "Dr. Rachel Thompson",
+      "name": "Dr. Nusrat Jahan",
       "department": "Pediatrics",
       "designation": "Pediatric Surgeon",
       "degrees": "MBBS, MS, MCh (Pediatric Surgery)",
@@ -145,7 +145,7 @@
     },
     {
       "id": "DOC014",
-      "name": "Dr. Daniel White",
+      "name": "Dr. Mizanur Rahman",
       "department": "Neurology",
       "designation": "Neurosurgeon",
       "degrees": "MBBS, MS, MCh (Neurosurgery)",
@@ -156,7 +156,7 @@
     },
     {
       "id": "DOC015",
-      "name": "Dr. Sophia Patel",
+      "name": "Dr. Sultana Parvin",
       "department": "ENT",
       "designation": "ENT Specialist",
       "degrees": "MBBS, MS (ENT)",
@@ -167,7 +167,7 @@
     },
     {
       "id": "DOC016",
-      "name": "Dr. William Clark",
+      "name": "Dr. Jahangir Alam",
       "department": "Gastroenterology",
       "designation": "Senior Gastroenterologist",
       "degrees": "MBBS, MD, DM (Gastroenterology)",
@@ -178,7 +178,7 @@
     },
     {
       "id": "DOC017",
-      "name": "Dr. Olivia Harris",
+      "name": "Dr. Mahbuba Khanam",
       "department": "Rheumatology",
       "designation": "Consultant Rheumatologist",
       "degrees": "MBBS, MD (Rheumatology)",
@@ -189,7 +189,7 @@
     },
     {
       "id": "DOC018",
-      "name": "Dr. Thomas Moore",
+      "name": "Dr. Habibur Rahman",
       "department": "Pulmonology",
       "designation": "Chest Specialist",
       "degrees": "MBBS, MD (Pulmonology)",
@@ -200,7 +200,7 @@
     },
     {
       "id": "DOC019",
-      "name": "Dr. Isabella Jackson",
+      "name": "Dr. Shirina Akhter",
       "department": "Nephrology",
       "designation": "Kidney Specialist",
       "degrees": "MBBS, MD, DM (Nephrology)",
@@ -211,7 +211,7 @@
     },
     {
       "id": "DOC020",
-      "name": "Dr. Andrew Lewis",
+      "name": "Dr. Alamgir Hossain",
       "department": "Oncology",
       "designation": "Cancer Specialist",
       "degrees": "MBBS, MD, DM (Medical Oncology)",
