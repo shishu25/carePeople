@@ -38,8 +38,9 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
   Future<void> _loadAppointments() async {
     setState(() => _isLoading = true);
 
-    final appointments =
-        await AppointmentService.getPatientAppointments(widget.phoneNumber);
+    final appointments = await AppointmentService.getPatientAppointments(
+      widget.phoneNumber,
+    );
     final doctors = await AppointmentService.loadDoctors();
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -50,7 +51,9 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
 
     for (var appointment in appointments) {
       try {
-        final appointmentDate = DateFormat('yyyy-MM-dd').parse(appointment.date);
+        final appointmentDate = DateFormat(
+          'yyyy-MM-dd',
+        ).parse(appointment.date);
         if (appointmentDate.isAfter(today) ||
             appointmentDate.isAtSameMomentAs(today)) {
           upcoming.add(appointment);
@@ -83,10 +86,7 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
       backgroundColor: Colors.grey[100],
       body: Column(
         children: [
-          const CustomAppBar(
-            title: 'My Appointments',
-            showBackButton: true,
-          ),
+          const CustomAppBar(title: 'My Appointments', showBackButton: true),
           Container(
             color: Colors.white,
             child: TabBar(
@@ -111,8 +111,16 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
                 : TabBarView(
                     controller: _tabController,
                     children: [
-                      _buildAppointmentList(_upcomingAppointments, true, screenWidth),
-                      _buildAppointmentList(_previousAppointments, false, screenWidth),
+                      _buildAppointmentList(
+                        _upcomingAppointments,
+                        true,
+                        screenWidth,
+                      ),
+                      _buildAppointmentList(
+                        _previousAppointments,
+                        false,
+                        screenWidth,
+                      ),
                     ],
                   ),
           ),
@@ -122,7 +130,10 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
   }
 
   Widget _buildAppointmentList(
-      List<Appointment> appointments, bool isUpcoming, double screenWidth) {
+    List<Appointment> appointments,
+    bool isUpcoming,
+    double screenWidth,
+  ) {
     if (appointments.isEmpty) {
       return Center(
         child: Column(
@@ -149,10 +160,7 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
               isUpcoming
                   ? 'Book your first appointment to see it here'
                   : 'Your appointment history will appear here',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[500],
-              ),
+              style: TextStyle(fontSize: 14, color: Colors.grey[500]),
             ),
           ],
         ),
@@ -201,9 +209,7 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         onTap: () {
           Navigator.push(
@@ -236,7 +242,9 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: isUpcoming ? Colors.blue[700] : Colors.grey[700],
+                          color: isUpcoming
+                              ? Colors.blue[700]
+                              : Colors.grey[700],
                         ),
                       ),
                     ),
@@ -282,9 +290,7 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: isUpcoming
-                          ? Colors.green[50]
-                          : Colors.grey[200],
+                      color: isUpcoming ? Colors.green[50] : Colors.grey[200],
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
                         color: isUpcoming
@@ -365,7 +371,11 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
+                      Icon(
+                        Icons.info_outline,
+                        color: Colors.blue[700],
+                        size: 20,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -389,7 +399,11 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
   }
 
   Widget _buildDetailItem(
-      IconData icon, String label, String value, Color color) {
+    IconData icon,
+    String label,
+    String value,
+    Color color,
+  ) {
     return Row(
       children: [
         Icon(icon, size: 18, color: color),
@@ -399,10 +413,7 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
           children: [
             Text(
               label,
-              style: TextStyle(
-                fontSize: 11,
-                color: Colors.grey[600],
-              ),
+              style: TextStyle(fontSize: 11, color: Colors.grey[600]),
             ),
             Text(
               value,

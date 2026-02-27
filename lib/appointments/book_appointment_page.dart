@@ -48,8 +48,8 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
   }
 
   List<String> _getDepartments() {
-    final departments =
-        _allDoctors.map((d) => d.department).toSet().toList()..sort();
+    final departments = _allDoctors.map((d) => d.department).toSet().toList()
+      ..sort();
     return ['All', ...departments];
   }
 
@@ -58,18 +58,22 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
       _filteredDoctors = _allDoctors.where((doctor) {
         final matchesDepartment =
             _selectedDepartment == 'All' ||
-                doctor.department == _selectedDepartment;
-        final matchesSearch = _searchQuery.isEmpty ||
+            doctor.department == _selectedDepartment;
+        final matchesSearch =
+            _searchQuery.isEmpty ||
             doctor.name.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-            doctor.department.toLowerCase().contains(_searchQuery.toLowerCase());
+            doctor.department.toLowerCase().contains(
+              _searchQuery.toLowerCase(),
+            );
         return matchesDepartment && matchesSearch;
       }).toList();
     });
   }
 
   DateTime _getNextAvailableDate() {
-    if (_selectedDoctor == null) return DateTime.now().add(const Duration(days: 1));
-    
+    if (_selectedDoctor == null)
+      return DateTime.now().add(const Duration(days: 1));
+
     DateTime currentDate = DateTime.now();
     for (int i = 1; i <= 30; i++) {
       final nextDate = currentDate.add(Duration(days: i));
@@ -90,10 +94,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
       backgroundColor: Colors.grey[100],
       body: Column(
         children: [
-          const CustomAppBar(
-            title: 'Book Appointment',
-            showBackButton: true,
-          ),
+          const CustomAppBar(title: 'Book Appointment', showBackButton: true),
           Expanded(
             child: _isLoading
                 ? const Center(child: CircularProgressIndicator())
@@ -180,7 +181,9 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
           child: Text(
             'No doctors found',
             style: TextStyle(
-                color: Colors.grey[600], fontSize: screenWidth * 0.04),
+              color: Colors.grey[600],
+              fontSize: screenWidth * 0.04,
+            ),
           ),
         ),
       );
@@ -250,8 +253,11 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                 SizedBox(height: screenHeight * 0.015),
                 Row(
                   children: [
-                    Icon(Icons.local_hospital,
-                        size: screenWidth * 0.035, color: Colors.grey[600]),
+                    Icon(
+                      Icons.local_hospital,
+                      size: screenWidth * 0.035,
+                      color: Colors.grey[600],
+                    ),
                     SizedBox(width: screenWidth * 0.01),
                     Flexible(
                       child: Text(
@@ -265,8 +271,11 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                       ),
                     ),
                     SizedBox(width: screenWidth * 0.03),
-                    Icon(Icons.payments,
-                        size: screenWidth * 0.035, color: Colors.green[600]),
+                    Icon(
+                      Icons.payments,
+                      size: screenWidth * 0.035,
+                      color: Colors.green[600],
+                    ),
                     SizedBox(width: screenWidth * 0.01),
                     Text(
                       '৳${doctor.consultationFee.toStringAsFixed(0)}',
@@ -301,10 +310,12 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                           foregroundColor: Colors.blue,
                           side: const BorderSide(color: Colors.blue),
                           padding: EdgeInsets.symmetric(
-                              vertical: screenHeight * 0.012),
+                            vertical: screenHeight * 0.012,
+                          ),
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(screenWidth * 0.02),
+                            borderRadius: BorderRadius.circular(
+                              screenWidth * 0.02,
+                            ),
                           ),
                         ),
                       ),
@@ -324,10 +335,12 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                           backgroundColor: Colors.blue,
                           foregroundColor: Colors.white,
                           padding: EdgeInsets.symmetric(
-                              vertical: screenHeight * 0.012),
+                            vertical: screenHeight * 0.012,
+                          ),
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(screenWidth * 0.02),
+                            borderRadius: BorderRadius.circular(
+                              screenWidth * 0.02,
+                            ),
                           ),
                         ),
                         child: Text(
@@ -379,8 +392,10 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                           _generatedSerial = null;
                         });
                       },
-                      child: Text('Change',
-                          style: TextStyle(fontSize: screenWidth * 0.035)),
+                      child: Text(
+                        'Change',
+                        style: TextStyle(fontSize: screenWidth * 0.035),
+                      ),
                     ),
                   ],
                 ),
@@ -396,15 +411,18 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                 Text(
                   '${_selectedDoctor!.designation} - ${_selectedDoctor!.department}',
                   style: TextStyle(
-                      color: Colors.grey[700], fontSize: screenWidth * 0.035),
+                    color: Colors.grey[700],
+                    fontSize: screenWidth * 0.035,
+                  ),
                 ),
                 SizedBox(height: screenHeight * 0.005),
                 Text(
                   'Consultation Fee: ৳${_selectedDoctor!.consultationFee.toStringAsFixed(0)}',
                   style: TextStyle(
-                      color: Colors.green[700],
-                      fontSize: screenWidth * 0.035,
-                      fontWeight: FontWeight.w600),
+                    color: Colors.green[700],
+                    fontSize: screenWidth * 0.035,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -441,7 +459,9 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                       selectableDayPredicate: (DateTime date) {
                         // Only allow dates that match doctor's consultation days
                         final dayName = DateFormat('EEEE').format(date);
-                        return _selectedDoctor!.consultationDays.contains(dayName);
+                        return _selectedDoctor!.consultationDays.contains(
+                          dayName,
+                        );
                       },
                     );
                     if (date != null) {
@@ -466,8 +486,9 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                           child: Text(
                             _selectedDate == null
                                 ? 'Choose a date'
-                                : DateFormat('EEEE, MMM dd, yyyy')
-                                    .format(_selectedDate!),
+                                : DateFormat(
+                                    'EEEE, MMM dd, yyyy',
+                                  ).format(_selectedDate!),
                             style: TextStyle(
                               fontSize: screenWidth * 0.037,
                               fontWeight: FontWeight.w500,
@@ -475,8 +496,11 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Icon(Icons.calendar_today,
-                            color: Colors.blue, size: screenWidth * 0.05),
+                        Icon(
+                          Icons.calendar_today,
+                          color: Colors.blue,
+                          size: screenWidth * 0.05,
+                        ),
                       ],
                     ),
                   ),
@@ -538,8 +562,10 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                     final isSelected = _selectedTimeSlot == slot;
 
                     return ChoiceChip(
-                      label: Text(slot,
-                          style: TextStyle(fontSize: screenWidth * 0.032)),
+                      label: Text(
+                        slot,
+                        style: TextStyle(fontSize: screenWidth * 0.032),
+                      ),
                       selected: isSelected,
                       onSelected: isBooked
                           ? null
@@ -549,10 +575,11 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                                 // Generate serial number
                                 final serial =
                                     await AppointmentService.getNextSerialNumber(
-                                  _selectedDoctor!.id,
-                                  DateFormat('yyyy-MM-dd')
-                                      .format(_selectedDate!),
-                                );
+                                      _selectedDoctor!.id,
+                                      DateFormat(
+                                        'yyyy-MM-dd',
+                                      ).format(_selectedDate!),
+                                    );
                                 setState(() => _generatedSerial = serial);
                               }
                             },
@@ -596,8 +623,11 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
           children: [
             Row(
               children: [
-                Icon(Icons.confirmation_number,
-                    color: Colors.green[700], size: screenWidth * 0.08),
+                Icon(
+                  Icons.confirmation_number,
+                  color: Colors.green[700],
+                  size: screenWidth * 0.08,
+                ),
                 SizedBox(width: screenWidth * 0.03),
                 Expanded(
                   child: Column(
@@ -628,13 +658,17 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
             SizedBox(height: screenHeight * 0.015),
             _buildInfoRow('Doctor', _selectedDoctor!.name, screenWidth),
             _buildInfoRow(
-                'Date',
-                DateFormat('EEEE, MMM dd, yyyy').format(_selectedDate!),
-                screenWidth),
+              'Date',
+              DateFormat('EEEE, MMM dd, yyyy').format(_selectedDate!),
+              screenWidth,
+            ),
             _buildInfoRow('Time', _selectedTimeSlot!, screenWidth),
             _buildInfoRow('Room', _selectedDoctor!.roomNumber, screenWidth),
-            _buildInfoRow('Fee',
-                '৳${_selectedDoctor!.consultationFee.toStringAsFixed(0)}', screenWidth),
+            _buildInfoRow(
+              'Fee',
+              '৳${_selectedDoctor!.consultationFee.toStringAsFixed(0)}',
+              screenWidth,
+            ),
             SizedBox(height: screenHeight * 0.02),
             SizedBox(
               width: double.infinity,
@@ -729,9 +763,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
               children: [
                 Icon(Icons.check_circle, color: Colors.white),
                 SizedBox(width: 12),
-                Expanded(
-                  child: Text('Appointment confirmed successfully!'),
-                ),
+                Expanded(child: Text('Appointment confirmed successfully!')),
               ],
             ),
             backgroundColor: Colors.green,
@@ -739,7 +771,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
             behavior: SnackBarBehavior.floating,
           ),
         );
-        
+
         // Navigate back to dashboard
         Navigator.pop(context);
       } else {

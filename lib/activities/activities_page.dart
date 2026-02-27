@@ -16,10 +16,7 @@ class ActivitiesPage extends StatelessWidget {
       backgroundColor: Colors.grey[100],
       body: Column(
         children: [
-          const CustomAppBar(
-            title: 'Activities',
-            showBackButton: true,
-          ),
+          const CustomAppBar(title: 'Activities', showBackButton: true),
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.all(screenWidth * 0.04),
@@ -62,10 +59,7 @@ class ActivitiesPage extends StatelessWidget {
                           SizedBox(height: screenHeight * 0.005),
                           const Text(
                             'Track and manage your healthcare activities',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
+                            style: TextStyle(color: Colors.white, fontSize: 14),
                           ),
                         ],
                       ),
@@ -85,9 +79,8 @@ class ActivitiesPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AppointmentsListPage(
-                            phoneNumber: phoneNumber,
-                          ),
+                          builder: (context) =>
+                              AppointmentsListPage(phoneNumber: phoneNumber),
                         ),
                       );
                     },
@@ -183,9 +176,7 @@ class ActivitiesPage extends StatelessWidget {
   }) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
@@ -199,11 +190,7 @@ class ActivitiesPage extends StatelessWidget {
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
-                  icon,
-                  size: 32,
-                  color: color,
-                ),
+                child: Icon(icon, size: 32, color: color),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -221,19 +208,12 @@ class ActivitiesPage extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       description,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                     ),
                   ],
                 ),
               ),
-              Icon(
-                Icons.arrow_forward_ios,
-                size: 20,
-                color: Colors.grey[400],
-              ),
+              Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey[400]),
             ],
           ),
         ),

@@ -16,10 +16,7 @@ class DoctorProfilePage extends StatelessWidget {
       backgroundColor: Colors.grey[100],
       body: Column(
         children: [
-          const CustomAppBar(
-            title: 'Doctor Profile',
-            showBackButton: true,
-          ),
+          const CustomAppBar(title: 'Doctor Profile', showBackButton: true),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -245,9 +242,7 @@ class DoctorProfilePage extends StatelessWidget {
   Widget _buildScheduleCard() {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -283,10 +278,7 @@ class DoctorProfilePage extends StatelessWidget {
                 Expanded(
                   child: Text(
                     doctor.consultationDays.join(', '),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
+                    style: const TextStyle(fontSize: 14, color: Colors.black54),
                   ),
                 ),
               ],
@@ -330,9 +322,7 @@ class DoctorProfilePage extends StatelessWidget {
   }) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -384,9 +374,7 @@ class DoctorProfilePage extends StatelessWidget {
   }) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -395,18 +383,12 @@ class DoctorProfilePage extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               title,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey[600],
-              ),
+              style: TextStyle(fontSize: 12, color: Colors.grey[600]),
             ),
             const SizedBox(height: 4),
             Text(
               value,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -416,23 +398,39 @@ class DoctorProfilePage extends StatelessWidget {
 
   String _getDoctorDescription(String department) {
     final descriptions = {
-      'Cardiology': 'Specializes in diagnosing and treating heart conditions, cardiovascular diseases, and related disorders. Expert in cardiac care and preventive cardiology.',
-      'Neurology': 'Expert in treating disorders of the nervous system, including brain, spinal cord, and nerve-related conditions.',
-      'Pediatrics': 'Dedicated to the health and medical care of infants, children, and adolescents. Provides comprehensive pediatric care.',
-      'Orthopedics': 'Specializes in the diagnosis, treatment, and prevention of disorders of the bones, joints, ligaments, tendons, and muscles.',
-      'Dermatology': 'Expert in diagnosing and treating skin, hair, and nail conditions. Provides both medical and cosmetic dermatology services.',
-      'General Surgery': 'Performs a wide range of surgical procedures with expertise in abdominal surgery and trauma care.',
-      'Gynecology': 'Specializes in women\'s reproductive health, pregnancy care, and gynecological conditions.',
-      'Ophthalmology': 'Expert in eye care, treating vision problems, eye diseases, and performing eye surgeries.',
-      'Psychiatry': 'Specializes in mental health disorders, providing diagnosis, treatment, and counseling services.',
-      'Endocrinology': 'Expert in hormone-related disorders, diabetes management, and metabolic conditions.',
-      'Urology': 'Specializes in urinary tract and male reproductive system disorders.',
-      'ENT': 'Expert in treating ear, nose, and throat conditions, including hearing and balance disorders.',
-      'Gastroenterology': 'Specializes in digestive system disorders, liver diseases, and gastrointestinal conditions.',
-      'Rheumatology': 'Expert in autoimmune diseases, arthritis, and musculoskeletal disorders.',
-      'Pulmonology': 'Specializes in respiratory system disorders and lung diseases.',
+      'Cardiology':
+          'Specializes in diagnosing and treating heart conditions, cardiovascular diseases, and related disorders. Expert in cardiac care and preventive cardiology.',
+      'Neurology':
+          'Expert in treating disorders of the nervous system, including brain, spinal cord, and nerve-related conditions.',
+      'Pediatrics':
+          'Dedicated to the health and medical care of infants, children, and adolescents. Provides comprehensive pediatric care.',
+      'Orthopedics':
+          'Specializes in the diagnosis, treatment, and prevention of disorders of the bones, joints, ligaments, tendons, and muscles.',
+      'Dermatology':
+          'Expert in diagnosing and treating skin, hair, and nail conditions. Provides both medical and cosmetic dermatology services.',
+      'General Surgery':
+          'Performs a wide range of surgical procedures with expertise in abdominal surgery and trauma care.',
+      'Gynecology':
+          'Specializes in women\'s reproductive health, pregnancy care, and gynecological conditions.',
+      'Ophthalmology':
+          'Expert in eye care, treating vision problems, eye diseases, and performing eye surgeries.',
+      'Psychiatry':
+          'Specializes in mental health disorders, providing diagnosis, treatment, and counseling services.',
+      'Endocrinology':
+          'Expert in hormone-related disorders, diabetes management, and metabolic conditions.',
+      'Urology':
+          'Specializes in urinary tract and male reproductive system disorders.',
+      'ENT':
+          'Expert in treating ear, nose, and throat conditions, including hearing and balance disorders.',
+      'Gastroenterology':
+          'Specializes in digestive system disorders, liver diseases, and gastrointestinal conditions.',
+      'Rheumatology':
+          'Expert in autoimmune diseases, arthritis, and musculoskeletal disorders.',
+      'Pulmonology':
+          'Specializes in respiratory system disorders and lung diseases.',
       'Nephrology': 'Expert in kidney diseases, dialysis, and renal care.',
-      'Oncology': 'Specializes in cancer diagnosis, treatment, and patient care with comprehensive oncology services.',
+      'Oncology':
+          'Specializes in cancer diagnosis, treatment, and patient care with comprehensive oncology services.',
     };
 
     return descriptions[department] ??

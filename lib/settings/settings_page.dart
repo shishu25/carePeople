@@ -23,10 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
       backgroundColor: Colors.grey[100],
       body: Column(
         children: [
-          const CustomAppBar(
-            title: 'Settings',
-            showBackButton: true,
-          ),
+          const CustomAppBar(title: 'Settings', showBackButton: true),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -71,10 +68,12 @@ class _SettingsPageState extends State<SettingsPage> {
                           value: _appAppearance,
                           underline: const SizedBox(),
                           items: ['System', 'Light', 'Dark']
-                              .map((mode) => DropdownMenuItem(
-                                    value: mode,
-                                    child: Text(mode),
-                                  ))
+                              .map(
+                                (mode) => DropdownMenuItem(
+                                  value: mode,
+                                  child: Text(mode),
+                                ),
+                              )
                               .toList(),
                           onChanged: (value) {
                             setState(() {
@@ -97,7 +96,9 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: () {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text('Security settings coming soon!'),
+                                  content: Text(
+                                    'Security settings coming soon!',
+                                  ),
                                 ),
                               );
                             },
@@ -110,7 +111,9 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: () {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text('Opening Terms & Conditions...'),
+                                  content: Text(
+                                    'Opening Terms & Conditions...',
+                                  ),
                                 ),
                               );
                             },
@@ -218,10 +221,7 @@ class _SettingsPageState extends State<SettingsPage> {
           color: textColor,
         ),
       ),
-      trailing: Icon(
-        trailing ?? Icons.chevron_right,
-        color: Colors.grey[600],
-      ),
+      trailing: Icon(trailing ?? Icons.chevron_right, color: Colors.grey[600]),
       onTap: onTap,
     );
   }
@@ -242,10 +242,7 @@ class _SettingsPageState extends State<SettingsPage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text(
-                'Cancel',
-                style: TextStyle(color: Colors.grey[600]),
-              ),
+              child: Text('Cancel', style: TextStyle(color: Colors.grey[600])),
             ),
             ElevatedButton(
               onPressed: () {
