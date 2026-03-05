@@ -7,8 +7,9 @@ import '../models/appointment_models.dart';
 class AppointmentService {
   static Future<List<Doctor>> loadDoctors() async {
     try {
-      final String response =
-          await rootBundle.loadString('assets/data/doctors.json');
+      final String response = await rootBundle.loadString(
+        'assets/data/doctors.json',
+      );
       final Map<String, dynamic> data = json.decode(response);
       final List<dynamic> doctorsJson = data['doctors'];
       return doctorsJson.map((json) => Doctor.fromJson(json)).toList();
@@ -58,8 +59,7 @@ class AppointmentService {
     }
   }
 
-  static Future<int> getNextSerialNumber(
-      String doctorId, String date) async {
+  static Future<int> getNextSerialNumber(String doctorId, String date) async {
     try {
       final appointments = await loadAppointments();
       final doctorAppointments = appointments
@@ -83,7 +83,9 @@ class AppointmentService {
   }
 
   static Future<List<String>> getBookedTimeSlotsForDate(
-      String doctorId, String date) async {
+    String doctorId,
+    String date,
+  ) async {
     try {
       final appointments = await loadAppointments();
       return appointments
@@ -122,15 +124,52 @@ class AppointmentService {
   }
 
   static Future<List<Appointment>> getPatientAppointments(
-      String phoneNumber) async {
+    String phoneNumber,
+  ) async {
     try {
       final appointments = await loadAppointments();
-      return appointments
-          .where((a) => a.patientPhone == phoneNumber)
-          .toList();
+      return appointments.where((a) => a.patientPhone == phoneNumber).toList();
     } catch (e) {
       print('Error getting patient appointments: $e');
       return [];
+    }
+  }
+
+  static Future<List<Appointment>> getDoctorAppointments(
+    String doctorId,
+  ) async {
+    try {
+      final appointments = await loadAppointments();
+      return appointments.where((a) => a.doctorId == doctorId).toList();
+    } catch (e) {
+      print('Error getting doctor appointments: $e');
+      return [];
+    }
+  }
+
+  static Future<bool> removeAppointment({
+    required String doctorId,
+    required String patientPhone,
+    required String date,
+  }) async {
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      final file = File('${directory.path}/appointments.json');
+      List<Appointment> appointments = await loadAppointments();
+      appointments.removeWhere(
+        (a) =>
+            a.doctorId == doctorId &&
+            a.patientPhone == patientPhone &&
+            a.date == date,
+      );
+      final Map<String, dynamic> data = {
+        'appointments': appointments.map((a) => a.toJson()).toList(),
+      };
+      await file.writeAsString(json.encode(data));
+      return true;
+    } catch (e) {
+      print('Error removing appointment: $e');
+      return false;
     }
   }
 }

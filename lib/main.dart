@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'home/spashpage/splashpage.dart';
 import 'services/session_service.dart';
 import 'patient/patient_dashboard.dart';
+import 'doctor/doctor_dashboard.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MyApp());
 }
 
@@ -36,6 +43,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
   bool _isChecking = true;
   bool _isLoggedIn = false;
   String? _phoneNumber;
+  Map<String, dynamic>? _doctorData;
 
   @override
   void initState() {
@@ -44,6 +52,18 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
   }
 
   Future<void> _checkSession() async {
+    // Check doctor session first
+    final isDoctorActive = await SessionService.isDoctorSessionActive();
+    if (isDoctorActive) {
+      final doctorData = await SessionService.getDoctorData();
+      setState(() {
+        _doctorData = doctorData;
+        _isChecking = false;
+      });
+      return;
+    }
+
+    // Then check patient session
     final isActive = await SessionService.isSessionActive();
     if (isActive) {
       final phoneNumber = await SessionService.getPhoneNumber();
@@ -66,8 +86,13 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
+    if (_doctorData != null) {
+      // Doctor session is active, go directly to doctor dashboard
+      return DoctorDashboard(doctorData: _doctorData!);
+    }
+
     if (_isLoggedIn && _phoneNumber != null) {
-      // Session is active, go directly to dashboard
+      // Patient session is active, go directly to dashboard
       return PatientDashboard(phoneNumber: _phoneNumber!);
     }
 

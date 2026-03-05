@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../mixed/appbar.dart';
 import '../../patient/patient_login.dart';
+import '../../doctor/doctor_login_page.dart';
 
 class IdentificationPage extends StatelessWidget {
   const IdentificationPage({super.key});
@@ -60,11 +61,10 @@ class IdentificationPage extends StatelessWidget {
                           ),
                           child: ElevatedButton(
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Feature coming soon!'),
-                                  backgroundColor: Colors.blue,
-                                  duration: Duration(seconds: 2),
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const DoctorLoginPage(),
                                 ),
                               );
                             },

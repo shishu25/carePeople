@@ -9,7 +9,8 @@
       "roomNumber": "301",
       "consultationFee": 1500,
       "consultationDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday"],
-      "consultationTimes": "09:00 AM - 01:00 PM, 03:00 PM - 06:00 PM"
+      "consultationTimes": "09:00 AM - 01:00 PM, 03:00 PM - 06:00 PM",
+      "password": "Kamal@1234"
     },
     {
       "id": "DOC002",
@@ -20,7 +21,8 @@
       "roomNumber": "405",
       "consultationFee": 1800,
       "consultationDays": ["Sunday", "Monday", "Wednesday", "Thursday"],
-      "consultationTimes": "10:00 AM - 02:00 PM, 04:00 PM - 07:00 PM"
+      "consultationTimes": "10:00 AM - 02:00 PM, 04:00 PM - 07:00 PM",
+      "password": "Farhana@1234"
     },
     {
       "id": "DOC003",
@@ -31,7 +33,8 @@
       "roomNumber": "201",
       "consultationFee": 1000,
       "consultationDays": ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday"],
-      "consultationTimes": "08:00 AM - 12:00 PM, 02:00 PM - 05:00 PM"
+      "consultationTimes": "08:00 AM - 12:00 PM, 02:00 PM - 05:00 PM",
+      "password": "Sharmin@1234"
     },
     {
       "id": "DOC004",
@@ -42,7 +45,8 @@
       "roomNumber": "502",
       "consultationFee": 1200,
       "consultationDays": ["Sunday", "Tuesday", "Wednesday", "Friday"],
-      "consultationTimes": "09:00 AM - 01:00 PM"
+      "consultationTimes": "09:00 AM - 01:00 PM",
+      "password": "Rafiqul@1234"
     },
     {
       "id": "DOC005",
@@ -53,7 +57,8 @@
       "roomNumber": "103",
       "consultationFee": 900,
       "consultationDays": ["Monday", "Tuesday", "Thursday", "Friday", "Saturday"],
-      "consultationTimes": "10:00 AM - 01:00 PM, 03:00 PM - 06:00 PM"
+      "consultationTimes": "10:00 AM - 01:00 PM, 03:00 PM - 06:00 PM",
+      "password": "Nasrin@1234"
     },
     {
       "id": "DOC006",
@@ -64,7 +69,8 @@
       "roomNumber": "601",
       "consultationFee": 2000,
       "consultationDays": ["Sunday", "Monday", "Tuesday", "Thursday"],
-      "consultationTimes": "09:00 AM - 12:00 PM"
+      "consultationTimes": "09:00 AM - 12:00 PM",
+      "password": "Abdul@1234"
     },
     {
       "id": "DOC007",
@@ -75,7 +81,8 @@
       "roomNumber": "304",
       "consultationFee": 1300,
       "consultationDays": ["Saturday", "Sunday", "Tuesday", "Wednesday", "Thursday"],
-      "consultationTimes": "10:00 AM - 02:00 PM, 04:00 PM - 06:00 PM"
+      "consultationTimes": "10:00 AM - 02:00 PM, 04:00 PM - 06:00 PM",
+      "password": "Tahmina@1234"
     },
     {
       "id": "DOC008",
@@ -86,7 +93,8 @@
       "roomNumber": "206",
       "consultationFee": 800,
       "consultationDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      "consultationTimes": "09:00 AM - 01:00 PM, 02:00 PM - 05:00 PM"
+      "consultationTimes": "09:00 AM - 01:00 PM, 02:00 PM - 05:00 PM",
+      "password": "Anwar@1234"
     },
     {
       "id": "DOC009",
@@ -97,7 +105,8 @@
       "roomNumber": "701",
       "consultationFee": 1100,
       "consultationDays": ["Sunday", "Monday", "Wednesday", "Friday"],
-      "consultationTimes": "11:00 AM - 03:00 PM, 05:00 PM - 08:00 PM"
+      "consultationTimes": "11:00 AM - 03:00 PM, 05:00 PM - 08:00 PM",
+      "password": "Ayesha@1234"
     },
     {
       "id": "DOC010",
@@ -108,7 +117,8 @@
       "roomNumber": "302",
       "consultationFee": 2500,
       "consultationDays": ["Sunday", "Tuesday", "Thursday"],
-      "consultationTimes": "08:00 AM - 12:00 PM"
+      "consultationTimes": "08:00 AM - 12:00 PM",
+      "password": "MohAli@1234"
     },
     {
       "id": "DOC011",
@@ -119,7 +129,8 @@
       "roomNumber": "408",
       "consultationFee": 1400,
       "consultationDays": ["Monday", "Wednesday", "Thursday", "Saturday"],
-      "consultationTimes": "09:00 AM - 01:00 PM, 03:00 PM - 06:00 PM"
+      "consultationTimes": "09:00 AM - 01:00 PM, 03:00 PM - 06:00 PM",
+      "password": "Razia@1234"
     },
     {
       "id": "DOC012",
@@ -130,7 +141,8 @@
       "roomNumber": "505",
       "consultationFee": 1200,
       "consultationDays": ["Sunday", "Monday", "Tuesday", "Friday", "Saturday"],
-      "consultationTimes": "10:00 AM - 01:00 PM, 04:00 PM - 07:00 PM"
+      "consultationTimes": "10:00 AM - 01:00 PM, 04:00 PM - 07:00 PM",
+      "password": "Shahidul@1234"
     },
     {
       "id": "DOC013",
@@ -141,7 +153,8 @@
       "roomNumber": "202",
       "consultationFee": 1600,
       "consultationDays": ["Sunday", "Tuesday", "Wednesday", "Thursday"],
-      "consultationTimes": "08:00 AM - 12:00 PM, 02:00 PM - 04:00 PM"
+      "consultationTimes": "08:00 AM - 12:00 PM, 02:00 PM - 04:00 PM",
+      "password": "Nusrat@1234"
     },
     {
       "id": "DOC014",
@@ -152,7 +165,8 @@
       "roomNumber": "406",
       "consultationFee": 2200,
       "consultationDays": ["Monday", "Wednesday", "Thursday", "Friday"],
-      "consultationTimes": "10:00 AM - 01:00 PM"
+      "consultationTimes": "10:00 AM - 01:00 PM",
+      "password": "Mizan@1234"
     },
     {
       "id": "DOC015",
@@ -163,7 +177,8 @@
       "roomNumber": "305",
       "consultationFee": 950,
       "consultationDays": ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Friday"],
-      "consultationTimes": "09:00 AM - 01:00 PM, 03:00 PM - 06:00 PM"
+      "consultationTimes": "09:00 AM - 01:00 PM, 03:00 PM - 06:00 PM",
+      "password": "Sultana@1234"
     },
     {
       "id": "DOC016",
@@ -174,7 +189,8 @@
       "roomNumber": "409",
       "consultationFee": 1500,
       "consultationDays": ["Sunday", "Tuesday", "Wednesday", "Thursday"],
-      "consultationTimes": "09:00 AM - 12:00 PM, 04:00 PM - 07:00 PM"
+      "consultationTimes": "09:00 AM - 12:00 PM, 04:00 PM - 07:00 PM",
+      "password": "Jahangir@1234"
     },
     {
       "id": "DOC017",
@@ -185,7 +201,8 @@
       "roomNumber": "308",
       "consultationFee": 1300,
       "consultationDays": ["Monday", "Tuesday", "Thursday", "Saturday"],
-      "consultationTimes": "10:00 AM - 02:00 PM, 03:00 PM - 05:00 PM"
+      "consultationTimes": "10:00 AM - 02:00 PM, 03:00 PM - 05:00 PM",
+      "password": "Mahbuba@1234"
     },
     {
       "id": "DOC018",
@@ -196,7 +213,8 @@
       "roomNumber": "410",
       "consultationFee": 1200,
       "consultationDays": ["Sunday", "Monday", "Wednesday", "Friday", "Saturday"],
-      "consultationTimes": "09:00 AM - 01:00 PM, 02:00 PM - 05:00 PM"
+      "consultationTimes": "09:00 AM - 01:00 PM, 02:00 PM - 05:00 PM",
+      "password": "Habibur@1234"
     },
     {
       "id": "DOC019",
@@ -207,7 +225,8 @@
       "roomNumber": "411",
       "consultationFee": 1400,
       "consultationDays": ["Sunday", "Tuesday", "Wednesday", "Thursday", "Saturday"],
-      "consultationTimes": "10:00 AM - 02:00 PM, 04:00 PM - 06:00 PM"
+      "consultationTimes": "10:00 AM - 02:00 PM, 04:00 PM - 06:00 PM",
+      "password": "Shirina@1234"
     },
     {
       "id": "DOC020",
@@ -218,7 +237,8 @@
       "roomNumber": "702",
       "consultationFee": 2000,
       "consultationDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "consultationTimes": "09:00 AM - 12:00 PM, 03:00 PM - 06:00 PM"
+      "consultationTimes": "09:00 AM - 12:00 PM, 03:00 PM - 06:00 PM",
+      "password": "Alamgir@1234"
     }
   ]
 }

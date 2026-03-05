@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:open_file/open_file.dart';
 import '../models/appointment_models.dart';
 import '../services/appointment_service.dart';
+import '../services/prescription_service.dart';
 import '../mixed/appbar.dart';
 import 'doctor_profile_page.dart';
 
@@ -20,6 +22,7 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
   List<Appointment> _upcomingAppointments = [];
   List<Appointment> _previousAppointments = [];
   List<Doctor> _allDoctors = [];
+  List<Prescription> _prescriptions = [];
   bool _isLoading = true;
 
   @override
@@ -42,6 +45,9 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
       widget.phoneNumber,
     );
     final doctors = await AppointmentService.loadDoctors();
+    final prescriptions = await PrescriptionService.getPatientPrescriptions(
+      widget.phoneNumber,
+    );
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
 
@@ -74,6 +80,7 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
       _upcomingAppointments = upcoming;
       _previousAppointments = previous;
       _allDoctors = doctors;
+      _prescriptions = prescriptions;
       _isLoading = false;
     });
   }
@@ -189,11 +196,26 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
             ),
           );
 
+          // Find matching prescription for previous appointments
+          Prescription? prescription;
+          if (!isUpcoming) {
+            try {
+              prescription = _prescriptions.firstWhere(
+                (p) =>
+                    p.doctorId == appointment.doctorId &&
+                    p.appointmentDate == appointment.date,
+              );
+            } catch (_) {
+              prescription = null;
+            }
+          }
+
           return _buildAppointmentCard(
             appointment,
             doctor,
             isUpcoming,
             screenWidth,
+            prescription: prescription,
           );
         },
       ),
@@ -204,8 +226,9 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
     Appointment appointment,
     Doctor doctor,
     bool isUpcoming,
-    double screenWidth,
-  ) {
+    double screenWidth, {
+    Prescription? prescription,
+  }) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 3,
@@ -391,6 +414,62 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
                   ),
                 ),
               ],
+
+              // ── Prescription banner (previous appointments only) ─────
+              if (!isUpcoming && prescription != null) ...[
+                const SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () => OpenFile.open(prescription.pdfPath),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.purple[50],
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.purple[200]!),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.description_outlined,
+                          color: Colors.purple[700],
+                          size: 20,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Prescription Available',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.purple[800],
+                                ),
+                              ),
+                              Text(
+                                'Tap to view your prescription PDF',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: Colors.purple[600],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icon(
+                          Icons.open_in_new,
+                          size: 16,
+                          color: Colors.purple[400],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ],
           ),
         ),
@@ -408,22 +487,25 @@ class _AppointmentsListPageState extends State<AppointmentsListPage>
       children: [
         Icon(icon, size: 18, color: color),
         const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              label,
-              style: TextStyle(fontSize: 11, color: Colors.grey[600]),
-            ),
-            Text(
-              value,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: TextStyle(fontSize: 11, color: Colors.grey[600]),
               ),
-            ),
-          ],
+              Text(
+                value,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
