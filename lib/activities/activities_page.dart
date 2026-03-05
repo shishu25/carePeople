@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../mixed/appbar.dart';
 import '../appointments/appointments_list_page.dart';
+import '../patient/prescriptions_list_page.dart';
 
 class ActivitiesPage extends StatelessWidget {
   final String phoneNumber;
@@ -113,10 +114,11 @@ class ActivitiesPage extends StatelessWidget {
                     description: 'View your prescriptions and medications',
                     color: Colors.orange,
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Prescriptions feature coming soon!'),
-                          backgroundColor: Colors.orange,
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PrescriptionsListPage(phoneNumber: phoneNumber),
                         ),
                       );
                     },
